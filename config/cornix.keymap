@@ -207,10 +207,10 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&kp TAB           &kp Q          &kp W    &kp E         &kp R             &kp T                                            &kp Y                          &kp U             &kp I            &kp O    &kp P          &kp BSLH
-&kp ESC           &hm_l LG(A) A  &lt 3 S  &lt 2 D       &lt 1 F           &hm_shift_l LEFT_SHIFT G                         &hm_shift_r RIGHT_SHIFT H      &lt 1 J           &lt 2 K          &lt 3 L  &kp SEMICOLON  &kp SINGLE_QUOTE
-&kp LC(UP_ARROW)  &hm_l LGUI Z   &kp X    &kp C         &kp V             &kp B                         &kp K_MUTE  &none  &kp N                          &kp M             &kp COMMA        &kp DOT  &kp FSLH       &kp BACKSPACE
-&snapshot         &none          &none    &lt 6 ESCAPE  &hm LEFT_GUI TAB  &hm_shift_l LEFT_SHIFT ENTER                     &hm_shift_r RIGHT_SHIFT SPACE  &hm RCTRL ESCAPE  &lt 2 BACKSPACE  &none    &none          &none
+&kp TAB           &kp Q          &kp W                &kp E                &kp R                &kp T                                            &kp Y                          &kp U             &kp I            &kp O    &kp P          &kp BSLH
+&kp ESC           &hm_l LG(A) A  &lt 3 S              &lt 2 D              &lt 1 F              &hm_shift_l LEFT_SHIFT G                         &hm_shift_r RIGHT_SHIFT H      &lt 1 J           &lt 2 K          &lt 3 L  &kp SEMICOLON  &kp SINGLE_QUOTE
+&kp LC(UP_ARROW)  &hm_l LGUI Z   &hm_shift_l LG(X) X  &hm_shift_l LG(C) C  &hm_shift_l LG(V) V  &hm_shift_l LG(B) B           &kp K_MUTE  &none  &kp N                          &kp M             &kp COMMA        &kp DOT  &kp FSLH       &kp BACKSPACE
+&snapshot         &none          &none                &lt 6 ESCAPE         &hm LEFT_GUI TAB     &hm_shift_l LEFT_SHIFT ENTER                     &hm_shift_r RIGHT_SHIFT SPACE  &hm RCTRL ESCAPE  &lt 2 BACKSPACE  &none    &none          &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
