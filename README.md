@@ -193,6 +193,7 @@ include:
 
   - board: cornix_right
     # shield: cornix_indicator
+    snippet: studio-rpc-usb-uart
     artifact-name: cornix_right
 
   - board: cornix_right
