@@ -141,6 +141,33 @@
             #binding-cells = <0>;
             bindings = <&kp LSHFT>, <&kp LS(LG(NUMBER_4))>;
         };
+
+        hm_hold_prefer: hm_hold_prefer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_HOLD_PREFER";
+            bindings = <&none>, <&none>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <100>;
+            hold-while-undecided;
+            hold-while-undecided-linger;
+            retro-tap;
+        };
+
+        hm_holdprefer_nolinger: hm_holdprefer_nolinger {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_HOLDPREFER_NOLINGER";
+            bindings = <&none>, <&none>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <100>;
+            hold-while-undecided;
+            retro-tap;
+        };
     };
 
     conditional_layers {
