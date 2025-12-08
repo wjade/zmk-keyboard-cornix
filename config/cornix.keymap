@@ -168,6 +168,12 @@
             hold-while-undecided;
             retro-tap;
         };
+
+        inc_dec_msc: inc_dec_msc {
+            compatible = "zmk,behavior-sensor-rotate-mouse-scroll";
+            #sensor-binding-cells = <2>;
+            bindings = <&msc>, <&msc>;
+        };
     };
 
     conditional_layers {
@@ -240,7 +246,7 @@
 &snapshot                        &kp LCTRL      &kp LEFT_ALT         &lt 6 ESCAPE         &hm LEFT_GUI TAB     &hm_shift_l LEFT_SHIFT ENTER                                &hm_shift_r RIGHT_SHIFT SPACE  &hm RCTRL BACKSPACE  &lt 2 RIGHT_CONTROL  &none    &none          &none
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_msc SCRL_UP SCRL_DOWN>;
         };
 
         win_layer {
@@ -260,7 +266,7 @@
 &bt BT_SEL 2  &bt BT_SEL 4   &bt BT_CLR    &trans         &trans               &trans                        &trans        &trans        &trans        &none      &none             &none
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_msc SCRL_UP SCRL_DOWN>;
         };
 
         Symbol_layer {
@@ -281,7 +287,7 @@
 &none  &none     &none     &none     &trans    &trans                     &kp TILDE  &trans     &kp GRAVE         &none              &none      &none
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_msc SCRL_UP SCRL_DOWN>;
         };
 
         Mix_layer {
@@ -301,7 +307,7 @@
 &none   &none   &none   &kp TAB  &trans  &kp BACKSPACE                  &trans    &trans     &kp N3     &none     &none    &none
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_msc SCRL_UP SCRL_DOWN>;
         };
 
         Adjust_layer {
