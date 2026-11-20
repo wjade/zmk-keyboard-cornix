@@ -1,0 +1,58 @@
+name: Build ZitaoTech Sofle firmware
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'sofle/zitaotech_sofle.keymap'
+      - 'sofle/keyboard-name.conf'
+      - '.github/workflows/build-sofle.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: zmkfirmware/zmk-build-arm:stable
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - board: zitaotech_sofle_left
+            shield: lpm_view;left_bbtrackpad
+            artifact: sofle-left-trackpad
+          - board: zitaotech_sofle_left
+            shield: lpm_view;left_bbtrackball
+            artifact: sofle-left-trackball
+          - board: zitaotech_sofle_right
+            shield: lpm_view;right_trackpoint
+            artifact: sofle-right-trackpoint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: DZT970525/zmk_config_zitaotech_sofle
+          ref: de74cef449957258173129c40b9a943a87bf8617
+          path: vendor-sofle
+          persist-credentials: false
+      - name: Build UF2
+        working-directory: vendor-sofle
+        shell: bash
+        env:
+          BOARD: ${{ matrix.board }}
+          SHIELD: ${{ matrix.shield }}
+          ARTIFACT: ${{ matrix.artifact }}
+        run: |
+          cp ../sofle/zitaotech_sofle.keymap config/zitaotech_sofle.keymap
+          west init -l config
+          west update --fetch-opt=--filter=tree:0
+          west zephyr-export
+          west build -s zmk/app -d build -b "$BOARD" -- \
+            "-DZMK_CONFIG=$PWD/config" "-DSHIELD=$SHIELD" \
+            "-DEXTRA_CONF_FILE=$GITHUB_WORKSPACE/sofle/keyboard-name.conf"
+          cp build/zephyr/zmk.uf2 "$ARTIFACT.uf2"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: vendor-sofle/${{ matrix.artifact }}.uf2
+          if-no-files-found: error
