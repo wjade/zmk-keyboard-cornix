@@ -129,10 +129,10 @@
         default_layer {
             display-name = "Base";
             bindings = <
-                &cornix_hm_l LC(LEFT_ALT) LC(UP_ARROW)  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp C_MUTE  &kp C_MUTE  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp BSPC
-                &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSLH
-                &kp ESC  &cornix_hm_l LG(A) A  &cornix_lt 7 S  &cornix_lt 6 D  &cornix_lt 5 F  &cornix_hm_shift_l LEFT_SHIFT G  &mkp LCLK  &mkp LCLK  &cornix_hm_shift_r RIGHT_SHIFT H  &cornix_lt 5 J  &cornix_lt 6 K  &cornix_lt 7 L  &kp SEMICOLON  &kp SINGLE_QUOTE
-                &kp LC(LS(LG(NUMBER_4)))  &cornix_hm_l LGUI Z  &cornix_hm_shift_l LG(X) X  &cornix_hm_shift_l LG(C) C  &cornix_hm_shift_l LG(V) V  &cornix_hm_shift_l LG(B) B  &kp K_MUTE  &kp PG_UP  &msc SCRL_DOWN  &kp LC(UP_ARROW)  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp BACKSPACE
+                &kp TAB  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp C_MUTE  &kp C_MUTE  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp BSPC
+                &kp ESC  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSLH
+                &cornix_hm_l LC(LEFT_ALT) LC(UP_ARROW)  &cornix_hm_l LG(A) A  &cornix_lt 7 S  &cornix_lt 6 D  &cornix_lt 5 F  &cornix_hm_shift_l LEFT_SHIFT G  &mkp LCLK  &mkp LCLK  &cornix_hm_shift_r RIGHT_SHIFT H  &cornix_lt 5 J  &cornix_lt 6 K  &cornix_lt 7 L  &kp SEMICOLON  &kp SINGLE_QUOTE
+                &snapshot  &cornix_hm_l LGUI Z  &cornix_hm_shift_l LG(X) X  &cornix_hm_shift_l LG(C) C  &cornix_hm_shift_l LG(V) V  &cornix_hm_shift_l LG(B) B  &kp K_MUTE  &kp PG_UP  &msc SCRL_DOWN  &kp LC(UP_ARROW)  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp BACKSPACE
                 &kp LCTRL  &kp LEFT_ALT  &cornix_lt 10 ESCAPE  &cornix_hm LEFT_GUI TAB  &cornix_hm_shift_l LEFT_SHIFT ENTER  &cornix_hm_shift_r RIGHT_SHIFT SPACE  &cornix_hm RCTRL BACKSPACE  &cornix_lt 6 RIGHT_CONTROL  &kp EQUAL  &cornix_lt 1 GRAVE
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -163,9 +163,9 @@
         MOUSE_layer {
             display-name = "MOUSE";
             bindings = <
-&kp ESC   &kp N1    &kp N2     &kp N3   &kp N4   &kp N5     &bt BT_CLR                       &kp C_MUTE       &kp N6     &kp N7         &kp N8    &kp N9    &kp N0   &kp BSPC
-&kp TAB   &kp Q     &kp W      &kp E    &kp R    &kp T                                                        &kp Y      &M_kp MB3 U    &kp I     &kp O     &kp P    &kp BSLH
-&kp CAPS  &kp A     &kp S      &kp D    &kp F    &kp G      &mkp LCLK                        &mkp LCLK        &kp H      &M_kp MB1 J    &kp K     &kp L     &kp SEMI &kp ENTER
+&trans   &kp N1    &kp N2     &kp N3   &kp N4   &kp N5     &bt BT_CLR                       &kp C_MUTE       &kp N6     &kp N7         &kp N8    &kp N9    &kp N0   &kp BSPC
+&trans   &kp Q     &kp W      &kp E    &kp R    &kp T                                                        &kp Y      &M_kp MB3 U    &kp I     &kp O     &kp P    &kp BSLH
+&trans  &kp A     &kp S      &kp D    &kp F    &kp G      &mkp LCLK                        &mkp LCLK        &kp H      &M_kp MB1 J    &kp K     &kp L     &kp SEMI &kp ENTER
 &trans    &kp Z     &kp X      &kp C    &kp V    &kp B      &msc SCRL_DOWN   &msc SCRL_UP    &none  &none     &kp N      &M_kp MB2 M    &kp COMMA &kp DOT   &kp FSLH &kp RSHIFT
                     &kp LCTRL  &kp LGUI &kp LALT &kp SPACE  &mkp MB1                         &LMouse_sc 0 MB1 &tdRMCLK   &kp MINUS      &kp EQUAL    &kp GRAVE
            >;
@@ -184,10 +184,10 @@
         cornix_win_layer {
             display-name = "Windows";
             bindings = <
-                &bt BT_SEL 2  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp NUMBER_7  &kp N8  &kp N9  &kp NUMBER_0  &trans
-                &bt BT_SEL 0  &cornix_hm_l LCTRL A  &cornix_hm_l LALT S  &cornix_hm_l LCTRL D  &cornix_hm_shift_l LSHFT F  &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp UP_ARROW  &kp RIGHT  &cornix_hm_r RCTRL SEMI  &trans
-                &bt BT_SEL 1  &bt BT_SEL 3  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp END  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &bt BT_SEL 0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp NUMBER_7  &kp N8  &kp N9  &kp NUMBER_0  &trans
+                &bt BT_SEL 1  &cornix_hm_l LCTRL A  &cornix_hm_l LALT S  &cornix_hm_l LCTRL D  &cornix_hm_shift_l LSHFT F  &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp UP_ARROW  &kp RIGHT  &cornix_hm_r RCTRL SEMI  &trans
+                &bt BT_SEL 2  &bt BT_SEL 3  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp END  &trans  &trans  &trans
                 &bt BT_SEL 4  &bt BT_CLR  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -208,10 +208,10 @@
         cornix_Mix_layer {
             display-name = "Mix";
             bindings = <
-                &none  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
                 &trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11
                 &trans  &kp N5  &kp N4  &kp N3  &kp N2  &kp N1  &trans  &trans  &kp BSPC  &kp MINUS  &kp EQUAL  &kp PLUS  &kp DQT  &kp F12
-                &trans  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &trans  &trans  &kp TAB  &kp INS  &kp HOME  &kp END  &trans  &trans
+                &none  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &trans  &trans  &kp TAB  &kp INS  &kp HOME  &kp END  &trans  &trans
                 &none  &none  &kp TAB  &trans  &kp BACKSPACE  &trans  &trans  &kp N3  &trans  &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -220,10 +220,10 @@
         cornix_Adjust_layer {
             display-name = "Adjust";
             bindings = <
-                &none  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none  &none  &none  &none  &none  &none
-                &none  &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4  &trans  &trans  &tog 5  &to 0  &none  &none  &none  &tog 5
-                &bt BT_CLR_ALL  &none  &none  &none  &none  &none  &trans  &trans  &trans  &trans  &none  &none  &none  &none  &ext_power EP_ON  &kp CAPSLOCK
+                &bt BT_CLR  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none  &none  &none  &none  &none  &none
+                &bt BT_CLR_ALL  &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4  &trans  &trans  &tog 5  &to 0  &none  &none  &none  &tog 5
+                &none  &none  &none  &none  &none  &none  &trans  &trans  &trans  &trans  &none  &none  &none  &none  &ext_power EP_ON  &kp CAPSLOCK
                 &none  &none  &none  &none  &none  &none  &none  &kp N4  &trans  &trans
             >;
         };
@@ -242,8 +242,8 @@
         cornix_KeyPad_layer {
             display-name = "NumPad";
             bindings = <
-                &none  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &mo 11  &none  &none  &none  &none  &none  &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp KP_MINUS  &kp KP_MULTIPLY  &none
+                &mo 11  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &none  &none  &none  &none  &none  &none  &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp KP_MINUS  &kp KP_MULTIPLY  &none
                 &none  &none  &none  &none  &none  &none  &trans  &trans  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_N6  &kp KP_PLUS  &kp KP_DIVIDE  &none
                 &none  &none  &none  &none  &none  &none  &trans  &trans  &trans  &trans  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_N3  &none  &none  &none
                 &none  &none  &none  &none  &mo 11  &kp KP_N0  &kp KP_DOT  &kp KP_NUMBER_0  &trans  &trans
@@ -253,8 +253,8 @@
         cornix_Debug_layer {
             display-name = "Debug";
             bindings = <
-                &none  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none  &none  &none  &none  &none  &none
+                &bt BT_CLR  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none  &none  &none  &none  &none  &none
                 &none  &none  &none  &none  &none  &none  &trans  &trans  &none  &none  &none  &none  &none  &none
                 &none  &none  &none  &none  &none  &bootloader  &trans  &trans  &trans  &trans  &bootloader  &none  &none  &none  &none  &none
                 &none  &none  &none  &none  &none  &none  &none  &kp N7  &trans  &trans
@@ -288,7 +288,7 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <150>;
             require-prior-idle-ms = <100>;
-            hold-trigger-key-positions = <14 15 16 17 18 19 26 27 28 29 30 31 40 41 42 43 44 45 59 60 61 62>;
+            hold-trigger-key-positions = <0 14 15 16 17 18 19 26 27 28 29 30 31 41 42 43 44 45 59 60 61 62>;
             hold-trigger-on-release;
         };
 
@@ -314,7 +314,7 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <150>;
             require-prior-idle-ms = <100>;
-            hold-trigger-key-positions = <14 15 16 17 18 19 26 27 28 29 30 31 40 41 42 43 44 45 59 60 61 62>;
+            hold-trigger-key-positions = <0 14 15 16 17 18 19 26 27 28 29 30 31 41 42 43 44 45 59 60 61 62>;
 
             hold-trigger-on-release;
         };
@@ -337,6 +337,12 @@
             flavor = "balanced";
             tapping-term-ms = <250>;
             quick-tap-ms = <200>;
+        };
+
+        snapshot: snapshot {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            bindings = <&kp LSHFT>, <&kp LC(LS(LG(NUMBER_4)))>;
         };
 
         cornix_lt: cornix_lt {
