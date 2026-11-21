@@ -125,7 +125,7 @@
                 &kp ESC  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSLH
                 &cornix_hm_l LC(LEFT_ALT) LC(UP_ARROW)  &cornix_hm_l LG(A) A  &cornix_lt 7 S  &cornix_lt 6 D  &cornix_lt 5 F  &cornix_hm_shift_l LEFT_SHIFT G  &mkp LCLK  &mkp LCLK  &cornix_hm_shift_r RIGHT_SHIFT H  &cornix_lt 5 J  &cornix_lt 6 K  &cornix_lt 7 L  &kp SEMICOLON  &kp SINGLE_QUOTE
                 &snapshot  &cornix_hm_l LGUI Z  &cornix_hm_shift_l LG(X) X  &cornix_hm_shift_l LG(C) C  &cornix_hm_shift_l LG(V) V  &cornix_hm_shift_l LG(B) B  &kp K_MUTE  &kp PG_UP  &msc SCRL_DOWN  &kp LC(UP_ARROW)  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp BACKSPACE
-                &kp LCTRL  &kp LEFT_ALT  &cornix_lt 10 ESCAPE  &mkp LCLK  &cornix_hm_shift_l LEFT_SHIFT ENTER  &cornix_hm_shift_r RIGHT_SHIFT SPACE  &cornix_hm RCTRL BACKSPACE  &cornix_lt 6 RIGHT_CONTROL  &kp EQUAL  &cornix_lt 1 GRAVE
+                &kp LCTRL  &kp LEFT_ALT  &cornix_lt 10 ESCAPE  &cornix_hm LEFT_GUI TAB  &cornix_hm_shift_l LEFT_SHIFT ENTER  &cornix_hm_shift_r RIGHT_SHIFT SPACE  &mkp LCLK  &cornix_lt 6 RIGHT_CONTROL  &kp EQUAL  &cornix_lt 1 GRAVE
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
@@ -159,7 +159,7 @@
 &trans   &kp Q     &kp W      &kp E    &kp R    &kp T                                                        &kp Y      &M_kp MB3 U    &kp I     &kp O     &kp P    &kp BSLH
 &trans  &kp A     &kp S      &trans    &trans    &kp G      &mkp LCLK                        &mkp LCLK        &kp H      &M_kp MB1 J    &trans     &kp L     &kp SEMI &kp ENTER
 &trans    &kp Z     &kp X      &kp C    &kp V    &kp B      &msc SCRL_DOWN   &msc SCRL_UP    &none  &none     &kp N      &M_kp MB2 M    &kp COMMA &kp DOT   &kp FSLH &kp RSHIFT
-                    &kp LCTRL  &kp LGUI &kp LALT &trans  &mkp MB1                         &LMouse_sc 0 MB1 &tdRMCLK   &kp MINUS      &kp EQUAL    &kp GRAVE
+                    &kp LCTRL  &kp LGUI &kp LALT &kp SPACE &mkp MB1                         &LMouse_sc 0 MB1 &trans  &kp MINUS      &kp EQUAL    &kp GRAVE
            >;
         };
         RES_layer {
