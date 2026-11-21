@@ -5,6 +5,7 @@ on:
     paths:
       - 'sofle/zitaotech_sofle.keymap'
       - 'sofle/keyboard-name.conf'
+      - 'sofle/bluetooth-name.patch'
       - '.github/workflows/build-sofle.yml'
 
 permissions:
@@ -46,6 +47,7 @@ jobs:
           cp ../sofle/zitaotech_sofle.keymap config/zitaotech_sofle.keymap
           west init -l config
           west update --fetch-opt=--filter=tree:0
+          git -C zmk apply "$GITHUB_WORKSPACE/sofle/bluetooth-name.patch"
           west zephyr-export
           west build -s zmk/app -d build -b "$BOARD" -- \
             "-DZMK_CONFIG=$PWD/config" "-DSHIELD=$SHIELD" \

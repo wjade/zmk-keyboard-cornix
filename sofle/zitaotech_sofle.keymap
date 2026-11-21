@@ -354,7 +354,7 @@
             compatible = "zmk,behavior-tap-dance";
             label = "SNAPSHOT";
             #binding-cells = <0>;
-            bindings = <&kp LSHFT>, <&kp LS(LG(NUMBER_4))>;
+            bindings = <&kp LSHFT>, <&kp LC(LS(LG(NUMBER_4)))>;
         };
     };
 
