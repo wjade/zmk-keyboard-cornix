@@ -1,0 +1,61 @@
+diff --git a/app/src/keymap.c b/app/src/keymap.c
+--- a/app/src/keymap.c
++++ b/app/src/keymap.c
+@@ -11,8 +11,9 @@
+ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
+ 
+ #include <zmk/stdlib.h>
+ #include <zmk/behavior.h>
++#include <zmk/endpoints.h>
+ #include <zmk/keymap.h>
+ #include <zmk/physical_layouts.h>
+ #include <zmk/matrix.h>
+ #include <zmk/sensors.h>
+@@ -706,11 +707,20 @@
+ 
+ int zmk_keymap_position_state_changed(uint8_t source, uint32_t position, bool pressed,
+                                       int64_t timestamp) {
+-    if (pressed) {
+-        zmk_keymap_active_behavior_layer[position] = _zmk_keymap_layer_state;
++#if DT_NODE_EXISTS(DT_NODELABEL(windows_shortcuts)) && IS_ENABLED(CONFIG_ZMK_BLE)
++    const zmk_keymap_layer_id_t windows_layer = DT_NODE_CHILD_IDX(DT_NODELABEL(windows_shortcuts));
++#endif
++
++    if (pressed) {
++        zmk_keymap_active_behavior_layer[position] = _zmk_keymap_layer_state;
++#if DT_NODE_EXISTS(DT_NODELABEL(windows_shortcuts)) && IS_ENABLED(CONFIG_ZMK_BLE)
++        const struct zmk_endpoint_instance endpoint = zmk_endpoints_selected();
++        WRITE_BIT(zmk_keymap_active_behavior_layer[position], windows_layer,
++                  endpoint.transport == ZMK_TRANSPORT_BLE && endpoint.ble.profile_index == 1);
++#endif
+     }
+ 
+     // We use int here to be sure we don't loop layer_idx back to UINT8_MAX
+     for (int layer_idx = ZMK_KEYMAP_LAYERS_LEN - 1;
+          layer_idx >= LAYER_ID_TO_INDEX(_zmk_keymap_layer_default); layer_idx--) {
+         zmk_keymap_layer_id_t layer_id = LAYER_INDEX_TO_ID(layer_idx);
+@@ -718,8 +728,24 @@
+         if (layer_id == ZMK_KEYMAP_LAYER_ID_INVAL) {
+             continue;
+         }
++#if DT_NODE_EXISTS(DT_NODELABEL(windows_shortcuts)) && IS_ENABLED(CONFIG_ZMK_BLE)
++        if (layer_id == windows_layer) {
++            continue;
++        }
++
++        /* Treat the slot-specific layer as an override of Base only. */
++        if (layer_id == _zmk_keymap_layer_default &&
++            zmk_keymap_layer_active_with_state(windows_layer,
++                                               zmk_keymap_active_behavior_layer[position])) {
++            int ret = zmk_keymap_apply_position_state(source, windows_layer, position, pressed,
++                                                      timestamp);
++            if (ret <= 0) {
++                return ret;
++            }
++        }
++#endif
+         if (zmk_keymap_layer_active_with_state(layer_id,
+                                                zmk_keymap_active_behavior_layer[position])) {
+             int ret =
+                 zmk_keymap_apply_position_state(source, layer_id, position, pressed, timestamp);
+             if (ret > 0) {
