@@ -1,0 +1,122 @@
+diff --git a/config/boards/shields/right_trackpoint/custom_driver_right/trackpoint_0x15.c b/config/boards/shields/right_trackpoint/custom_driver_right/trackpoint_0x15.c
+--- a/config/boards/shields/right_trackpoint/custom_driver_right/trackpoint_0x15.c
++++ b/config/boards/shields/right_trackpoint/custom_driver_right/trackpoint_0x15.c
+@@ -140,12 +140,21 @@
+     struct gpio_dt_spec motion_gpio;
+ };
+ 
+-struct trackpoint_data {
+-    const struct device *dev;
+-    struct k_work work;
++/* Ramp pointer motion after a short delay, with a bounded maximum gain. */
++#define TRACKPOINT_RAMP_IDLE_MS 100U
++#define TRACKPOINT_RAMP_DELAY_MS 100U
++#define TRACKPOINT_RAMP_DURATION_MS 500U
++#define TRACKPOINT_RAMP_MAX_GAIN 1.8f
++
++struct trackpoint_data {
++    const struct device *dev;
++    struct k_work work;
+     struct gpio_callback motion_cb_data;
+     struct k_work_delayable enable_irq_work; // ⭐ 新增
+-    uint32_t last_packet_time;
++    uint32_t last_packet_time;
++    uint32_t last_pointer_motion_time;
++    uint32_t pointer_motion_ms;
++    bool pointer_moving;
+     int16_t scroll_residue_x;
+     int16_t scroll_residue_y;
+     int16_t arrow_residue_x;
+@@ -269,17 +278,39 @@
+     *residue = (*residue * 3) / 4;
+ }
+ 
+-static void trackpoint_work_cb(struct k_work *work) {
+-    struct trackpoint_data *data = CONTAINER_OF(work, struct trackpoint_data, work);
+-    const struct device *dev = data->dev;
++static float trackpoint_pointer_gain(struct trackpoint_data *data, uint32_t now) {
++    const uint32_t elapsed = now - data->last_pointer_motion_time;
++    const uint32_t ramp_end = TRACKPOINT_RAMP_DELAY_MS + TRACKPOINT_RAMP_DURATION_MS;
++
++    if (!data->pointer_moving || elapsed >= TRACKPOINT_RAMP_IDLE_MS) {
++        data->pointer_motion_ms = 0;
++    } else {
++        data->pointer_motion_ms = MIN(data->pointer_motion_ms + elapsed, ramp_end);
++    }
++
++    data->pointer_moving = true;
++    data->last_pointer_motion_time = now;
++    if (data->pointer_motion_ms <= TRACKPOINT_RAMP_DELAY_MS) {
++        return 1.0f;
++    }
++
++    const float progress =
++        (float)(data->pointer_motion_ms - TRACKPOINT_RAMP_DELAY_MS) / TRACKPOINT_RAMP_DURATION_MS;
++    return 1.0f + progress * (TRACKPOINT_RAMP_MAX_GAIN - 1.0f);
++}
++
++static void trackpoint_work_cb(struct k_work *work) {
++    struct trackpoint_data *data = CONTAINER_OF(work, struct trackpoint_data, work);
++    const struct device *dev = data->dev;
+ 
+     uint32_t now = k_uptime_get_32();
+ 
+     /* ========= WATCHDOG ========= */
+     if (now - last_activity_time > TRACKPOINT_WDT_TIMEOUT) {
+-        LOG_WRN("TrackPoint watchdog recovery");
+-
+-        data->scroll_residue_x = 0;
++        LOG_WRN("TrackPoint watchdog recovery");
++
++        data->pointer_moving = false;
++        data->scroll_residue_x = 0;
+         data->scroll_residue_y = 0;
+         data->arrow_residue_x = 0;
+         data->arrow_residue_y = 0;
+@@ -293,7 +324,8 @@
+     int ret = trackpoint_read_packet(dev, &dx, &dy);
+ 
+     if (ret != 0) {
+-        LOG_WRN("TrackPoint I2C read failed (soft recover)");
++        LOG_WRN("TrackPoint I2C read failed (soft recover)");
++        data->pointer_moving = false;
+ 
+         /* ⚠️ 不 break，不 sleep，不卡住 */
+         data->scroll_residue_x = 0;
+@@ -307,9 +339,13 @@
+     /* ========= scroll mode 切换检测 ========= */
+     bool just_enter_scroll = scroll_key_pressed && !last_scroll_key_pressed;
+     bool just_enter_arrow = arrow_key_pressed && !last_arrow_key_pressed;
+-    bool capslock = current_indicators & HID_INDICATORS_CAPS_LOCK;
+-
+-    if (arrow_key_pressed) {
++    bool capslock = current_indicators & HID_INDICATORS_CAPS_LOCK;
++
++    if (arrow_key_pressed || scroll_key_pressed || slow_key_pressed || (dx == 0 && dy == 0)) {
++        data->pointer_moving = false;
++    }
++
++    if (arrow_key_pressed) {
+ 
+         if (just_enter_arrow) {
+             data->arrow_residue_x = dx;
+@@ -376,10 +412,15 @@
+         float exp_mult = 1.0f;
+ #endif
+ 
+-        float slow_mult = slow_key_pressed ? SLOW_KEY_MULTIPLIER : 1.0f;
+-
+-        float fx = dx * MOUSE_BASE_SPEED * tp_factor * exp_mult * slow_mult;
+-        float fy = dy * MOUSE_BASE_SPEED * tp_factor * exp_mult * slow_mult;
++        float slow_mult = slow_key_pressed ? SLOW_KEY_MULTIPLIER : 1.0f;
++        float ramp_mult = 1.0f;
++        if (!slow_key_pressed && (dx != 0 || dy != 0)) {
++            ramp_mult = trackpoint_pointer_gain(data, now);
++        }
++
++        const float pointer_scale = MOUSE_BASE_SPEED * tp_factor * exp_mult * slow_mult * ramp_mult;
++        float fx = dx * pointer_scale;
++        float fy = dy * pointer_scale;
+ 
+         input_report_rel(dev, INPUT_REL_X, -(int)fx, false, K_NO_WAIT);
+         input_report_rel(dev, INPUT_REL_Y, -(int)fy, true, K_NO_WAIT);
