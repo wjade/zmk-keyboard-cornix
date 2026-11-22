@@ -7,7 +7,6 @@ on:
       - 'sofle/keyboard-name.conf'
       - 'sofle/bluetooth-name.patch'
       - 'sofle/bluetooth-windows-layer.patch'
-      - 'sofle/trackpoint-acceleration.patch'
       - '.github/workflows/build-sofle.yml'
 
 permissions:
@@ -47,7 +46,6 @@ jobs:
           ARTIFACT: ${{ matrix.artifact }}
         run: |
           cp ../sofle/zitaotech_sofle.keymap config/zitaotech_sofle.keymap
-          git apply "$GITHUB_WORKSPACE/sofle/trackpoint-acceleration.patch"
           west init -l config
           west update --fetch-opt=--filter=tree:0
           git -C zmk apply "$GITHUB_WORKSPACE/sofle/bluetooth-name.patch"
