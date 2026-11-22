@@ -192,7 +192,7 @@
                 &none  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR  &kp RPAR  &kp PIPE
                 &none  &none  &kp LBKT  &kp RBKT  &mkp LCLK  &mkp RCLK  &trans  &trans  &kp MINUS  &kp EQUAL  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp GRAVE  &kp SQT
                 &none  &none  &kp RBKT  &kp RPAR  &kp PIPE  &kp BSLH  &trans  &trans  &trans  &trans  &kp UNDER  &kp PLUS  &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp TILDE  &none
-                &none  &none  &none  &trans  &trans  &kp TILDE  &trans  &kp GRAVE  &trans  &trans
+                &none  &none  &none  &mkp RCLK  &trans  &kp TILDE  &trans  &kp GRAVE  &trans  &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
